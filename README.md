@@ -101,6 +101,8 @@ Your initial setup URL: http://<vps-ip>:8000
 
 Open that in a browser and create the first admin account. Use a strong password — this is the keys-to-the-kingdom UI.
 
+<!-- screenshot 01: Coolify first-run "Register / first admin signup" page. See docs/images/README.md for capture details. -->
+
 > **Pitfall #1:** if your host blocks outgoing connections by default (rare on OVH/Hetzner, common on locked-down corporate networks), the installer hangs on the Docker pull. From a different terminal, SSH in and run `docker ps` — if it returns nothing meaningful for >2 minutes, your firewall is the issue. Allow outbound `:443` and retry.
 
 ## Step 2 — Point a domain at the VPS via Cloudflare
@@ -114,6 +116,8 @@ In Cloudflare DNS for your domain (`example.com`), create two `A` records:
 
 - `coolify.example.com` is the Coolify dashboard itself. Keep it **DNS-only** permanently — the dashboard doesn't need DDoS protection and Cloudflare proxying interferes with the Let's Encrypt HTTP-01 challenge.
 - `cms.example.com` is your actual app. Keep it **DNS-only** *until the first SSL cert is issued*, then flip to **Proxied** in [Step 9](#step-9--flip-cloudflare-to-proxied--verify-ssl).
+
+<!-- screenshot 02: Cloudflare DNS records page with both A records showing gray cloud (DNS only). VPS IP masked. -->
 
 Wait ~30 seconds for DNS to propagate, then verify:
 
@@ -133,6 +137,8 @@ Back in the Coolify UI:
 2. Click **Save**. Coolify auto-generates a Let's Encrypt cert via Traefik.
 3. Wait ~30 seconds, then reload — the URL bar should now show HTTPS for the dashboard itself.
 
+<!-- screenshot 03: Coolify Settings → Configuration with Instance Domain set to https://coolify.example.com. -->
+
 If the cert doesn't appear, check **Servers → localhost → Proxy Logs** for Traefik errors. The most common cause is the DNS A record pointing somewhere else (typo, propagation lag).
 
 ## Step 4 — Create the project + add MongoDB
@@ -148,7 +154,11 @@ In Coolify:
    - **Database name**: `payload`
 5. Click **Deploy**. After ~30s the database is up.
 
+<!-- screenshot 04: Coolify "+ New Resource → Database → MongoDB" form filled in: username `payload`, db name `payload`, password masked. -->
+
 Coolify shows a **Connection String** in the resource view, looking like:
+
+<!-- screenshot 05: MongoDB resource view with the Connection String field visible. Mask password and container hash. -->
 
 ```text
 mongodb://payload:<password>@<container-name>:27017/payload?authSource=admin
@@ -161,12 +171,17 @@ Copy this — you'll paste it as `DATABASE_URL` in [Step 6](#step-6--environment
 ## Step 5 — Connect your GitHub repo
 
 1. **Coolify → Sources → + Add → GitHub App**. Install the Coolify GitHub App on your account or organization and grant it access to the repo. This sets up the webhook and OAuth flow in one step.
+
+   <!-- screenshot 06: GitHub "Install Coolify GitHub App" permission screen with the DigitalVantage org row visible. -->
+
 2. Inside the project, click **+ New Resource → Application**.
 3. Pick the **GitHub source** you just added, choose your repo, branch `main`.
 4. **Build Pack: Dockerfile** (the starter ships one at the project root).
 5. Set **Domain** to `https://cms.example.com`.
 6. Set **Port Exposes** to `3000` (Next.js standalone server).
 7. **Don't deploy yet** — set environment variables first.
+
+<!-- screenshot 07: Coolify application creation form filled in: Build Pack Dockerfile, Domain https://cms.example.com, Port 3000, Branch main. -->
 
 ## Step 6 — Environment variables
 
@@ -193,6 +208,8 @@ Mark `PAYLOAD_SECRET`, `CRON_SECRET`, `PREVIEW_SECRET` as **Secret** in Coolify 
 
 > **Pitfall #3:** `NEXT_PUBLIC_*` vars are baked into the client JS bundle **at build time**, not runtime. Changing `NEXT_PUBLIC_SERVER_URL` requires a **rebuild**, not just a restart. Coolify shows a "Build Variable" vs "Runtime Variable" toggle next to each env var — set `NEXT_PUBLIC_*` ones to "Build Variable" so they're available during `next build`. Everything else stays as a runtime variable.
 
+<!-- screenshot 08: Coolify Environment Variables tab with all six vars added, Build/Runtime toggle visible, Secret lock icon on at least one secret. Values masked. -->
+
 ## Step 7 — Persistent volume for media uploads
 
 Payload writes uploaded images to `public/media/` by default. Without a persistent volume, every redeploy wipes the directory.
@@ -204,6 +221,8 @@ In the application config → **Storages** → **+ Add Persistent Storage**:
 - **Volume Name**: `payload-media` (Coolify creates and persists it under `/var/lib/docker/volumes/`)
 
 > **Note:** for production at any meaningful scale, swap the local volume for **S3-compatible object storage** (Hetzner Object Storage, Cloudflare R2, MinIO on a separate VPS, AWS S3). The local-volume approach is fine up to a few GB of uploads — beyond that, restoring from backup gets painful. See [Going further](#going-further).
+
+<!-- screenshot 09: Coolify Persistent Storage form filled in: Mount Path /app/public/media, Type Volume, Volume Name payload-media. -->
 
 ## Step 8 — Deploy
 
@@ -218,6 +237,8 @@ The first build takes **5–10 minutes** with no Docker layer cache. Subsequent 
 
 Once the deploy is green, hit `https://cms.example.com/admin` and create the first Payload admin user. Don't lose this password — there's no "forgot password" flow without an email adapter configured (see [Going further](#going-further)).
 
+<!-- screenshot 10: Coolify deploy logs in success state — green status bar, last lines showing "Container started", "Health check passed", route added by Traefik. -->
+
 ## Step 9 — Flip Cloudflare to proxied + verify SSL
 
 Once `https://cms.example.com` works with the gray cloud (DNS-only), switch the Cloudflare A record proxy status to **Proxied** (orange cloud). You now get:
@@ -227,7 +248,11 @@ Once `https://cms.example.com` works with the gray cloud (DNS-only), switch the 
 - HTTP/3, Brotli compression, automatic IPv6.
 - Edge caching for `/_next/static/*` (configurable via Cloudflare Page Rules or Cache Rules).
 
+<!-- screenshot 12 (nice-to-have): Cloudflare DNS table after the flip: cms.example.com now has the orange cloud (Proxied). Side-by-side with screenshot 02 ideal but not required. -->
+
 In Cloudflare → **SSL/TLS → Overview**, set the encryption mode to **Full (strict)**. This tells Cloudflare to validate the origin cert (the Let's Encrypt one Coolify just issued) — anything weaker leaves you vulnerable to MITM between Cloudflare and your VPS.
+
+<!-- screenshot 11 (nice-to-have): Cloudflare SSL/TLS Overview with encryption mode Full (strict) highlighted. -->
 
 Verify end-to-end:
 
@@ -247,6 +272,8 @@ git push origin main
 
 Within 5–10 seconds the Coolify dashboard shows a new deployment running. The webhook delivery and logs are visible in **GitHub → repo → Settings → Webhooks → Recent Deliveries** if you ever need to debug.
 
+<!-- screenshot 13 (nice-to-have): Coolify application Webhooks tab (or GitHub → Settings → Webhooks → Recent Deliveries) showing the auto-deploy webhook firing. -->
+
 ## Database backups
 
 Coolify has built-in scheduled backups. In the MongoDB resource → **Backups** tab:
@@ -254,6 +281,8 @@ Coolify has built-in scheduled backups. In the MongoDB resource → **Backups** 
 - **Frequency**: `Daily, 02:00` server time (cron: `0 2 * * *`)
 - **Retention**: `7 days` for hot backups; longer if your storage permits.
 - **Storage**: Local volume by default. For real disaster recovery, configure an **S3 destination** (Coolify supports it natively) so a single VPS loss doesn't take backups down with the data.
+
+<!-- screenshot 14 (nice-to-have): MongoDB resource → Backups tab with scheduled backup configured (Daily 02:00, retention 7 days). -->
 
 For an ad-hoc manual backup:
 
