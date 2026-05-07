@@ -49,6 +49,5 @@ jobs:
             --max-cache-age 7d
             --no-progress
             --accept 200,201,202,204,206,301,302,303,307,308,403,429
-            --exclude-mail
             './**/*.md'
           fail: true
