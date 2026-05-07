@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Digital Vantage — commercial deployment & maintenance
+    url: https://www.digitalvantage.pl
+    about: Need a partner to deploy, scale, or maintain a Payload + Next.js platform on Coolify? Get in touch.
+  - name: Starter repo (the code half of this guide)
+    url: https://github.com/DigitalVantage/nextjs-payload-starter
+    about: Application code, Dockerfile, CI — pairs with this guide.
+  - name: Coolify documentation
+    url: https://coolify.io/docs
+    about: Questions about Coolify itself (panels, services, server config) belong upstream.
+  - name: Payload CMS documentation
+    url: https://payloadcms.com/docs
+    about: Questions about Payload itself (collections, hooks, plugins) belong upstream.
+  - name: Next.js documentation
+    url: https://nextjs.org/docs
+    about: Questions about Next.js APIs, routing, or App Router belong upstream.

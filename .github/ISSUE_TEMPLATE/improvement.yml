@@ -1,0 +1,33 @@
+name: Improvement
+description: Suggest a new section, additional troubleshooting entry, or other enhancement.
+title: '[improvement] '
+labels: ['enhancement', 'needs-triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got a deployment war story or a missing section? Tell us about it.
+
+  - type: textarea
+    id: gap
+    attributes:
+      label: What's missing or could be better?
+      description: What pain are you trying to solve for future readers?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed addition
+      description: Outline the new section or improvement. Headings, command snippets, screenshots welcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: experience
+    attributes:
+      label: Have you done this in production?
+      description: We strongly prefer additions backed by real deployment experience. If you'd be willing to write the section yourself, say so.
+    validations:
+      required: false

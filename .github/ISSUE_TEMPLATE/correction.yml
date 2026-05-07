@@ -1,0 +1,56 @@
+name: Correction
+description: The guide says something wrong, missing, or out of date.
+title: '[correction] '
+labels: ['correction', 'needs-triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for catching this. Please fill in the sections below so we can fix it fast.
+
+  - type: input
+    id: section
+    attributes:
+      label: Section / step
+      description: Which part of the guide? (Step number, anchor, or quoted heading.)
+      placeholder: 'Step 6 — Environment variables'
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What the guide currently says
+      description: Quote or paraphrase the relevant content.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What is actually correct
+      description: What did you observe? Include error messages, version numbers, or links to upstream docs.
+    validations:
+      required: true
+
+  - type: input
+    id: coolify-version
+    attributes:
+      label: Coolify version
+      placeholder: '4.x.y'
+    validations:
+      required: true
+
+  - type: input
+    id: stack-versions
+    attributes:
+      label: Payload / Next.js / MongoDB versions
+      placeholder: 'Payload 3.84, Next.js 16.2, MongoDB 7'
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Logs, screenshots, links to upstream issues, etc.
