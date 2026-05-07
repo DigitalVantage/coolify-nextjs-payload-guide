@@ -1,0 +1,30 @@
+{
+  // markdownlint-cli2 config — https://github.com/DavidAnson/markdownlint
+  "default": true,
+
+  // Allow lines longer than 80 chars — code blocks and tables routinely exceed
+  "MD013": false,
+
+  // Allow inline HTML — needed for <details>, <summary>, <kbd> in some places
+  "MD033": false,
+
+  // Allow first line not to be a top-level heading (CHANGELOG starts with H1
+  // but body uses H2 for releases; that's fine)
+  "MD041": false,
+
+  // Allow duplicate headings under different parents (e.g. multiple "Added" in CHANGELOG)
+  "MD024": { "siblings_only": true },
+
+  // Allow trailing punctuation in headings (we use em dashes / colons in step titles)
+  "MD026": { "punctuation": ".,;:!。,;:!" },
+
+  // Don't fail on emphasis used as heading — we use it sparingly and intentionally
+  "MD036": false,
+
+  // Allow bare URLs in tables (badge images and similar)
+  "MD034": false,
+
+  // Don't enforce strict table column alignment — Markdown renderers don't care
+  // about pipe alignment, and forcing it makes editing tables painful
+  "MD060": false
+}
