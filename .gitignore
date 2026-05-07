@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Tooling
+node_modules/
+.cache/
+
+# Lychee link checker cache
+.lycheecache
+
+# Local notes / drafts the maintainer keeps out of the repo
+NOTES.local.md
+TODO.local.md
+*.local
