@@ -2,7 +2,11 @@
 
 > Self-host a production **Next.js** + **Payload CMS** + **MongoDB** stack on a single VPS using [**Coolify**](https://coolify.io). Step-by-step, copy-paste-ready, written from a real production deployment.
 >
-> Maintained by **[Digital Vantage](https://www.digitalvantage.pl)**. Pairs with the [`nextjs-payload-starter`](https://github.com/DigitalVantage/nextjs-payload-starter) repo, which ships with a Coolify-ready Dockerfile.
+> Maintained by **[Digital Vantage](https://www.digitalvantage.pl/go/git)**. Pairs with the [`nextjs-payload-starter`](https://github.com/DigitalVantage/nextjs-payload-starter) repo, which ships with a Coolify-ready Dockerfile.
+>
+> **Prefer prose?** The same material is written up as an article:
+> [🇵🇱 Self-hosting z Coolify](https://www.digitalvantage.pl/artykuly/strony-internetowe/technologie/self-hosting-coolify)
+> · [🇬🇧 Self-hosting with Coolify](https://www.digitalvantage.eu/posts/websites-internet/technologies/self-hosting-coolify)
 
 [![Coolify](https://img.shields.io/badge/Coolify-self--hosted-6B46C1)](https://coolify.io)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
@@ -445,6 +449,8 @@ Before sharing the URL publicly:
 ## Useful links
 
 - **Starter repo (the code half of this guide)**: <https://github.com/DigitalVantage/nextjs-payload-starter>
+- **Article version (PL)**: <https://www.digitalvantage.pl/artykuly/strony-internetowe/technologie/self-hosting-coolify>
+- **Article version (EN)**: <https://www.digitalvantage.eu/posts/websites-internet/technologies/self-hosting-coolify>
 - **Coolify docs**: <https://coolify.io/docs>
 - **Payload CMS docs**: <https://payloadcms.com/docs>
 - **Next.js docs**: <https://nextjs.org/docs>
@@ -463,8 +469,8 @@ Spotted an error, an outdated screenshot, a missing pitfall? **[Open an issue](h
 
 **Digital Vantage** — partnerstwo technologiczne dla firm B2B w Polsce.
 
-- Website: <https://www.digitalvantage.pl>
+- Website: [digitalvantage.pl](https://www.digitalvantage.pl/go/git) (PL) · [digitalvantage.eu](https://www.digitalvantage.eu/go/git) (EN)
 - Email: kontakt@digitalvantage.pl
 - GitHub: [@DigitalVantage](https://github.com/DigitalVantage)
 
-If you need a partner to deploy, scale or maintain a Payload + Next.js platform — [get in touch](https://www.digitalvantage.pl).
+If you need a partner to deploy, scale or maintain a Payload + Next.js platform — [get in touch](https://www.digitalvantage.pl/go/git).

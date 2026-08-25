@@ -8,8 +8,15 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ## [Unreleased]
 
+### Added
+
+- Links to the PL and EN article versions of the guide, in the intro and under
+  **Useful links**.
+
 ### Changed
 
+- Digital Vantage call-to-action links now use the `/go/git` shortlinks so traffic
+  from this repo is attributed correctly, and offer the EN site alongside PL.
 - Cloudflare edge-caching guidance points at **Cache Rules** only. Page Rules are
   deprecated and unavailable on Free zones created after 2024-07-01 — the plan this
   guide assumes.
