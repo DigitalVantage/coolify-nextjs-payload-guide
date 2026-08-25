@@ -1,3 +1,11 @@
+<!--
+  Coolify Deployment Guide: Next.js + Payload CMS + MongoDB
+  Copyright (c) 2026 Digital Vantage - https://www.digitalvantage.pl/go/git
+  Licensed under the MIT License - see LICENSE.
+  Source: https://github.com/DigitalVantage/coolify-nextjs-payload-guide
+  Keep this notice if you copy, translate or republish this file.
+-->
+
 # Coolify Deployment Guide: Next.js + Payload CMS + MongoDB
 
 > Self-host a production **Next.js** + **Payload CMS** + **MongoDB** stack on a single VPS using [**Coolify**](https://coolify.io). Step-by-step, copy-paste-ready, written from a real production deployment.
@@ -463,7 +471,16 @@ Spotted an error, an outdated screenshot, a missing pitfall? **[Open an issue](h
 
 ## License
 
-[MIT](LICENSE) — Digital Vantage. Use, fork, translate, republish — just keep the attribution.
+[MIT](LICENSE) — Copyright © 2026 [Digital Vantage](https://www.digitalvantage.pl/go/git).
+
+Use it, fork it, translate it, republish it — commercially too. The licence asks for one
+thing back: keep the copyright notice with the copy, so readers can trace the guide to its
+source. The guide's Markdown files carry that notice as a comment at the top; if you
+republish somewhere that strips comments, paste this line instead:
+
+```text
+Coolify Deployment Guide — © 2026 Digital Vantage — https://www.digitalvantage.pl/go/git — MIT
+```
 
 ## Maintainer
 

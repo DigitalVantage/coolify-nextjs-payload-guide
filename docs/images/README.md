@@ -1,3 +1,11 @@
+<!--
+  Coolify Deployment Guide: Next.js + Payload CMS + MongoDB
+  Copyright (c) 2026 Digital Vantage - https://www.digitalvantage.pl/go/git
+  Licensed under the MIT License - see LICENSE.
+  Source: https://github.com/DigitalVantage/coolify-nextjs-payload-guide
+  Keep this notice if you copy, translate or republish this file.
+-->
+
 # Screenshot capture cheatsheet
 
 This is the working list of screenshots needed for the main `README.md`. Take them once during a real Coolify deployment, anonymize, save here as WebP, and replace the corresponding `<!-- screenshot NN -->` markers in the main README with the actual `![alt](docs/images/NN-...)` line.
