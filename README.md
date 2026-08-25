@@ -330,9 +330,12 @@ retries for `serverSelectionTimeoutMS` (30 s by default), which absorbs a normal
 cold start. If your app still loses the race, deploy the MongoDB resource first, wait for
 it to report healthy, then deploy the app.
 
-### 2. `Error: connect ECONNREFUSED ::1:5432` (wrong DB type)
+### 2. `MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017`
 
-You forgot to set `DATABASE_URL`, or there's a typo in it. Payload's mongoose adapter falls back to a localhost lookup that resolves to nothing in the container. Triple-check the env var. The connection string from Coolify's MongoDB resource view is the canonical source.
+You forgot to set `DATABASE_URL`, or there's a typo in it. With no connection string,
+the mongoose adapter falls back to its built-in default of `127.0.0.1:27017`, which
+inside the app container resolves to nothing. Triple-check the env var — the connection
+string from Coolify's MongoDB resource view is the canonical source.
 
 ### 3. Build OOMs ("Killed signal: 9") on a small VPS
 

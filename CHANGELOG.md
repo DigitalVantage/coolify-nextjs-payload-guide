@@ -10,6 +10,9 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ### Fixed
 
+- Troubleshooting entry 2 quoted a PostgreSQL error (`::1:5432`) that the MongoDB
+  adapter cannot emit. Replaced with the error mongoose actually raises when
+  `DATABASE_URL` is missing.
 - Removed a fix that pointed at a non-existent **Configuration → Depends On** setting;
   Coolify offers `depends_on` only for Docker Compose resources, not for Dockerfile-based
   applications. Replaced with the two causes that actually produce the error.
