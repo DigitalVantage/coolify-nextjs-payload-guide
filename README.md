@@ -7,7 +7,7 @@
 [![Coolify](https://img.shields.io/badge/Coolify-self--hosted-6B46C1)](https://coolify.io)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![Payload](https://img.shields.io/badge/Payload-3-000000?logo=payloadcms)](https://payloadcms.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-8.0-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Table of contents
@@ -37,7 +37,7 @@
 After ~45 minutes of focused work:
 
 - **Next.js 16 + Payload CMS 3** app running on your own VPS, served at your domain over HTTPS.
-- **MongoDB 7** running as a managed Coolify service on the same VPS.
+- **MongoDB 8.0** running as a managed Coolify service on the same VPS.
 - **Automatic redeploys** on every `git push` to `main`.
 - **Let's Encrypt SSL** behind a Cloudflare proxy.
 - **Persistent media uploads** that survive redeploys.
@@ -148,11 +148,17 @@ In Coolify:
 1. **Projects → + New Project**, name it e.g. `nextjs-payload-prod`.
 2. Pick or create a **Server**. The local server is auto-created on install — that's the one you want for a single-VPS setup.
 3. Inside the project, click **+ New Resource → Database → MongoDB**.
-4. Pick **MongoDB 7**. Set:
+4. Pick **MongoDB 8.0**. Set:
    - **Username**: `payload`
    - **Password**: click "Generate" (Coolify produces a strong random one — copy it now or you'll have to look it up later)
    - **Database name**: `payload`
 5. Click **Deploy**. After ~30s the database is up.
+
+> **Pin the minor version.** Pick `8.0`, not `8` or `latest`. MongoDB ships Rapid
+> Releases (8.1, 8.2, 8.3) alongside the supported `8.0` line, and the floating `8`
+> tag does not reliably track `8.0` — at the time of writing it points at an older
+> digest than `8.0` itself. Rapid Releases are also short-lived: 8.2 reached
+> end-of-life in July 2026. `8.0` is the line that keeps getting security patches.
 
 <!-- screenshot 04: Coolify "+ New Resource → Database → MongoDB" form filled in: username `payload`, db name `payload`, password masked. -->
 

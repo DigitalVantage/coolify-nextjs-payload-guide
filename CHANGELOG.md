@@ -8,6 +8,11 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ## [Unreleased]
 
+### Changed
+
+- Guide now targets **MongoDB 8.0** instead of 7, with an explicit warning to pin the
+  minor version rather than the floating `8` / `latest` tags.
+
 ### Fixed
 
 - Repaired a 404 link to Payload's cloud-storage plugin docs, which moved to
