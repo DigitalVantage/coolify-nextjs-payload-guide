@@ -10,6 +10,8 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ### Fixed
 
+- Repaired a 404 link to Payload's cloud-storage plugin docs, which moved to
+  **Upload → Storage Adapters**. This was failing the lychee link check in CI.
 - Troubleshooting entry 2 quoted a PostgreSQL error (`::1:5432`) that the MongoDB
   adapter cannot emit. Replaced with the error mongoose actually raises when
   `DATABASE_URL` is missing.

@@ -430,7 +430,7 @@ Before sharing the URL publicly:
 
 ## Going further
 
-- **Object storage for media** — swap the local volume for S3-compatible storage. Payload's [`@payloadcms/plugin-cloud-storage`](https://payloadcms.com/docs/plugins/cloud-storage) wires this up in ~10 lines of config. Recommended providers: Hetzner Object Storage (€1/TB), Cloudflare R2 (free egress), Backblaze B2.
+- **Object storage for media** — swap the local volume for S3-compatible storage. Payload's [storage adapters](https://payloadcms.com/docs/upload/storage-adapters) wire this up in ~10 lines of config — [`@payloadcms/storage-s3`](https://www.npmjs.com/package/@payloadcms/storage-s3) covers every S3-compatible provider. Recommended providers: Hetzner Object Storage (€1/TB), Cloudflare R2 (free egress), Backblaze B2.
 - **Transactional email** — plug Resend, Postmark or SendGrid into Payload's `email` config (any nodemailer-compatible adapter works). Without this, password reset / forgot-password flows are unavailable.
 - **Multi-environment** — clone the application in Coolify pointing at a `develop` branch with `staging.example.com`. Use the same MongoDB resource with a different database name (`payload_staging`).
 - **Monitoring** — Coolify integrates with Plausible / Umami for traffic; for app-level errors, plug Sentry into Next.js (`@sentry/nextjs`).
