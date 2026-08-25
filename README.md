@@ -316,7 +316,19 @@ The five errors you're statistically likely to hit, in roughly the order people 
 
 ### 1. `MongoNetworkError: connect ECONNREFUSED <mongo-host>:27017`
 
-The app container started before MongoDB was ready. In Coolify, application **Configuration → Depends On** → select your MongoDB resource. This makes Coolify wait for the Mongo health check before starting your app.
+Two different problems produce this, and they need different fixes.
+
+**The containers aren't on the same Docker network.** Coolify auto-resolves a database's
+container name only for resources inside the *same project*. If the app and the MongoDB
+resource live in different projects, the hostname never resolves and every connection is
+refused, cold start or not. Simplest fix: move both into one project.
+
+**MongoDB genuinely wasn't ready yet.** Coolify has no `depends_on` for Dockerfile-based
+applications — that setting exists only for Docker Compose resources — so start ordering
+isn't something you can configure away here. In practice the mongoose driver already
+retries for `serverSelectionTimeoutMS` (30 s by default), which absorbs a normal Mongo
+cold start. If your app still loses the race, deploy the MongoDB resource first, wait for
+it to report healthy, then deploy the app.
 
 ### 2. `Error: connect ECONNREFUSED ::1:5432` (wrong DB type)
 

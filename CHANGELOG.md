@@ -10,6 +10,9 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ### Fixed
 
+- Removed a fix that pointed at a non-existent **Configuration → Depends On** setting;
+  Coolify offers `depends_on` only for Docker Compose resources, not for Dockerfile-based
+  applications. Replaced with the two causes that actually produce the error.
 - The suggested `docker exec <app-container> pnpm payload migrate` cannot run: the
   standalone runtime image ships no `pnpm` and no Payload CLI. Replaced with an
   SSH-tunnel workflow run from a full checkout.
