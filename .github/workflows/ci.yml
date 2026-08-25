@@ -24,7 +24,7 @@ jobs:
           persist-credentials: false
 
       - name: Run markdownlint-cli2
-        uses: DavidAnson/markdownlint-cli2-action@v20
+        uses: DavidAnson/markdownlint-cli2-action@v24
         with:
           config: '.markdownlint.jsonc'
           globs: |
