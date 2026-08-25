@@ -8,6 +8,13 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ## [Unreleased]
 
+### Security
+
+- CI workflow now declares an explicit least-privilege `permissions: contents: read`
+  instead of inheriting the repository default.
+- `actions/checkout` runs with `persist-credentials: false`, so the job token is no
+  longer written into `.git/config` where later steps could read it.
+
 ## [0.1.0] - 2026-05-07
 
 ### Added
