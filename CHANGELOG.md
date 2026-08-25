@@ -10,6 +10,9 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ### Fixed
 
+- Manual `mongodump` / `mongorestore` commands omitted authentication flags and could
+  never have worked against a Coolify-provisioned MongoDB, which always runs with
+  auth enabled. Both now read credentials from the container environment.
 - Let's Encrypt troubleshooting named the wrong rate limit. The 5-per-week figure is
   the *exact set of identifiers* (duplicate certificate) limit, not the per-registered-domain
   limit, which is 50 per 7 days. The "wait a week" advice is replaced with the real

@@ -284,18 +284,30 @@ Coolify has built-in scheduled backups. In the MongoDB resource → **Backups** 
 
 <!-- screenshot 14 (nice-to-have): MongoDB resource → Backups tab with scheduled backup configured (Daily 02:00, retention 7 days). -->
 
-For an ad-hoc manual backup:
+For an ad-hoc manual backup. Coolify starts MongoDB with authentication enabled, so
+`mongodump` needs credentials — without them it fails with `Authentication failed`.
+Read them from the container's own environment so the password never lands in your
+shell history:
 
 ```bash
-docker exec <mongo-container> mongodump --archive --gzip > backup-$(date +%F).gz
+docker exec <mongo-container> sh -c 'mongodump --archive --gzip \
+  -u "$MONGO_INITDB_ROOT_USERNAME" \
+  -p "$MONGO_INITDB_ROOT_PASSWORD" \
+  --authenticationDatabase admin' > backup-$(date +%F).gz
 ```
 
 To restore:
 
 ```bash
-gunzip -c backup-2026-05-07.gz | docker exec -i <mongo-container> mongorestore --archive --drop
+gunzip -c backup-2026-05-07.gz | docker exec -i <mongo-container> sh -c 'mongorestore --archive --drop \
+  -u "$MONGO_INITDB_ROOT_USERNAME" \
+  -p "$MONGO_INITDB_ROOT_PASSWORD" \
+  --authenticationDatabase admin'
 ```
 
+> **Note:** `--drop` wipes each collection before restoring it. Rehearse on a
+> throwaway database name first, not on the live one.
+>
 > **Test the restore at least once** before you need it. A backup you've never restored is barely a backup.
 
 ## Troubleshooting
