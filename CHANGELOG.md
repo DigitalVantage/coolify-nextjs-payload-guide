@@ -8,6 +8,13 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ## [Unreleased]
 
+### Fixed
+
+- Let's Encrypt troubleshooting named the wrong rate limit. The 5-per-week figure is
+  the *exact set of identifiers* (duplicate certificate) limit, not the per-registered-domain
+  limit, which is 50 per 7 days. The "wait a week" advice is replaced with the real
+  refill rate of one duplicate certificate every 34 hours.
+
 ### Security
 
 - CI workflow now declares an explicit least-privilege `permissions: contents: read`

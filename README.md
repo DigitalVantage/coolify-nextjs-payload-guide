@@ -323,11 +323,15 @@ Next.js production build briefly needs **2–3 GB RAM**. On a 4 GB VPS with Mong
 
 - **Upgrade the VPS** to 8 GB RAM if your traffic justifies it.
 
-### 4. Let's Encrypt rate-limited (5 certs / week / registered domain)
+### 4. Let's Encrypt rate-limited (5 duplicate certs / 7 days)
 
-Triggered by repeated DNS or domain config errors during initial setup. Coolify uses LE production certs by default. If you hit the rate limit, you have two options:
+Triggered by repeated DNS or domain config errors during initial setup. Coolify uses LE production certs by default.
 
-- Wait a week (LE resets weekly).
+The limit you hit here is **"New Certificates per Exact Set of Identifiers"** — 5 certificates per 7 days for the *same* set of hostnames, which is exactly what retrying `cms.example.com` over and over does. The roomier limit of **50 certificates per registered domain per 7 days** is almost certainly not your problem.
+
+If you hit it, you have two options:
+
+- **Wait ~34 hours.** Capacity refills continuously — one duplicate certificate every 34 hours — so there is no weekly reset to sit out.
 - Configure the **DNS-01 challenge with a wildcard cert** — covers all subdomains, only counts as one certificate. Worth doing anyway if you plan multiple environments (`staging.example.com`, `preview.example.com`, …).
 
 ### 5. Cloudflare 522 / 524 timeouts on long-running requests
