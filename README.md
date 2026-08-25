@@ -252,7 +252,7 @@ Once `https://cms.example.com` works with the gray cloud (DNS-only), switch the 
 - DDoS protection and bot mitigation at Cloudflare's edge.
 - Free unmetered bandwidth (egress through Cloudflare doesn't count against your VPS plan).
 - HTTP/3, Brotli compression, automatic IPv6.
-- Edge caching for `/_next/static/*` (configurable via Cloudflare Page Rules or Cache Rules).
+- Edge caching for `/_next/static/*` (configurable via Cloudflare **Cache Rules**). Page Rules are deprecated and are not offered at all on Free zones created after 2024-07-01 — use Cache Rules.
 
 <!-- screenshot 12 (nice-to-have): Cloudflare DNS table after the flip: cms.example.com now has the orange cloud (Proxied). Side-by-side with screenshot 02 ideal but not required. -->
 
