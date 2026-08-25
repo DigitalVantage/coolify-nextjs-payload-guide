@@ -8,6 +8,8 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-08-25
+
 ### Added
 
 - Links to the PL and EN article versions of the guide, in the intro and under
@@ -68,5 +70,6 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 - Screenshots of the Coolify UI not yet attached — placeholder spots in `docs/images/` to be filled from the maintainer's production deployment.
 - Tested with Coolify 4.x, MongoDB 7, Payload 3.84, Next.js 16 — versions move fast; CI does not auto-detect when upstream UI changes break the guide.
 
-[Unreleased]: https://github.com/DigitalVantage/coolify-nextjs-payload-guide/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/DigitalVantage/coolify-nextjs-payload-guide/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/DigitalVantage/coolify-nextjs-payload-guide/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/DigitalVantage/coolify-nextjs-payload-guide/releases/tag/v0.1.0
