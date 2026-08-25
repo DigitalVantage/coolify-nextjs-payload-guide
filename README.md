@@ -350,11 +350,32 @@ If you hit it, you have two options:
 
 Cloudflare's free plan times out at **100 seconds**. Long Payload imports, migrations, or heavy GraphQL queries can exceed that. Two workarounds:
 
-- For one-off admin tasks, skip the proxy and SSH straight to the container:
+- For one-off admin tasks, skip the proxy and work directly against the VPS.
+
+  > **Careful:** the `output: 'standalone'` runtime image contains only `server.js`,
+  > `.next/static`, `public` and the dependencies Next.js traced — there is no `pnpm`
+  > and no `payload` CLI, so `docker exec <app-container> pnpm payload migrate` fails
+  > with `pnpm: not found`.
+
+  Run Payload migrations from a full local checkout instead, tunnelling to the
+  database over SSH:
 
   ```bash
-  docker exec -it <app-container> pnpm payload migrate
+  # 1. find the Mongo container's address on the Docker network
+  ssh root@<vps-ip> "docker inspect -f \
+    '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <mongo-container>"
+
+  # 2. forward it to your laptop and leave this running
+  ssh -L 27017:<mongo-ip>:27017 root@<vps-ip>
+
+  # 3. in a second terminal, run against the tunnel
+  DATABASE_URL='mongodb://payload:<password>@127.0.0.1:27017/payload?authSource=admin' \
+    pnpm payload migrate
   ```
+
+  With the MongoDB adapter most schema changes need no migration at all — Payload
+  writes documents in the new shape and reads tolerate the old one. Reach for
+  migrations when you need a *data* transform, not a schema one.
 
 - For app-level long requests, move the work to a Payload **job/queue** (`payload.jobs.queue(...)`) and return immediately — Cloudflare-friendly by design.
 

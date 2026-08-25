@@ -10,6 +10,9 @@ For a documentation repo "version" means: meaningful structural revisions, not e
 
 ### Fixed
 
+- The suggested `docker exec <app-container> pnpm payload migrate` cannot run: the
+  standalone runtime image ships no `pnpm` and no Payload CLI. Replaced with an
+  SSH-tunnel workflow run from a full checkout.
 - Manual `mongodump` / `mongorestore` commands omitted authentication flags and could
   never have worked against a Coolify-provisioned MongoDB, which always runs with
   auth enabled. Both now read credentials from the container environment.
